@@ -1,8 +1,10 @@
 package com.backendpet.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "categoria_producto")
 public class CategoriaProducto {
 
