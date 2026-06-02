@@ -1,5 +1,7 @@
 package com.backendpet.controller;
 
+import com.backendpet.dto.AgregarAlCarritoRequest;
+import com.backendpet.dto.CarritoResponseDTO;
 import com.backendpet.entity.Carrito;
 import com.backendpet.service.CarritoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +35,10 @@ public class CarritoController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Integer id) {
         carritoService.eliminar(id);
+    }
+
+    @PostMapping("/agregar")
+    public CarritoResponseDTO agregarAlCarrito(@RequestBody AgregarAlCarritoRequest request) {
+        return carritoService.agregarProducto(request);
     }
 }
