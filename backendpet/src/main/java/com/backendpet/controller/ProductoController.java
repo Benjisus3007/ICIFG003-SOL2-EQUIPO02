@@ -24,4 +24,9 @@ public class ProductoController {
     public List<Producto> listarPorCategoria(@PathVariable Integer id) {
         return productoService.obtenerPorCategoria(id);
     }
+
+    @GetMapping("/con-stock")
+    public List<Producto> listarConStock() {
+        return productoService.obtenerConStock();
+    }
 }
