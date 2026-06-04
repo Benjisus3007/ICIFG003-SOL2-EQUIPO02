@@ -1,0 +1,32 @@
+<app-menu [cantidadCarrito]="carritoService.cantidad()" />
+
+<main class="pagina">
+  <section class="seccion contacto" aria-labelledby="titulo-contacto">
+    <div>
+      <p class="etiqueta">Contacto</p>
+      <h1 id="titulo-contacto">Envíanos un mensaje</h1>
+      <p>Completa el formulario y responderemos tu consulta a la brevedad.</p>
+      <app-mensaje [texto]="mensaje()" [tipo]="tipoMensaje()" />
+    </div>
+
+    <form #formularioContacto="ngForm" (ngSubmit)="enviarContacto(formularioContacto)" novalidate>
+      <div class="campo">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" type="text" [(ngModel)]="contacto.nombre" required autocomplete="name" />
+      </div>
+
+      <div class="campo">
+        <label for="correo">Correo electrónico</label>
+        <input id="correo" name="correo" type="email" [(ngModel)]="contacto.correo" required email autocomplete="email" />
+      </div>
+
+      <div class="campo">
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" rows="5" [(ngModel)]="contacto.mensaje" required minlength="20"></textarea>
+        <small>El mensaje debe tener al menos 20 caracteres.</small>
+      </div>
+
+      <button type="submit">Enviar mensaje</button>
+    </form>
+  </section>
+</main>

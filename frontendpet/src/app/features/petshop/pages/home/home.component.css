@@ -1,0 +1,265 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.pagina {
+  width: min(1180px, 90vw);
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 1.5rem;
+  align-items: stretch;
+  margin: 1rem 0 2rem;
+}
+
+.hero__contenido,
+.destacado,
+.seccion {
+  border: 1px solid #e5e7eb;
+  border-radius: 1.4rem;
+  background: #ffffff;
+  box-shadow: 0 18px 40px rgb(15 23 42 / 8%);
+}
+
+.hero__contenido {
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.hero h1 {
+  max-width: 760px;
+  margin: 0.4rem 0 1rem;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.05;
+}
+
+.hero p {
+  max-width: 720px;
+  color: #475569;
+  font-size: 1.08rem;
+}
+
+.etiqueta {
+  margin: 0;
+  color: #047857;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+}
+
+.boton-principal,
+.boton-secundario,
+.tarjeta-acceso a {
+  display: inline-block;
+  border-radius: 0.85rem;
+  padding: 0.85rem 1.1rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.boton-principal,
+.tarjeta-acceso a {
+  background: #047857;
+  color: #ffffff;
+}
+
+.boton-secundario {
+  border: 1px solid #047857;
+  color: #047857;
+  background: #ffffff;
+}
+
+.boton-principal:hover,
+.boton-principal:focus-visible,
+.boton-secundario:hover,
+.boton-secundario:focus-visible,
+.tarjeta-acceso a:hover,
+.tarjeta-acceso a:focus-visible {
+  outline: 3px solid #a7f3d0;
+}
+
+.destacado {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #ecfdf5, #ffffff);
+}
+
+.destacado span {
+  font-size: 3rem;
+}
+
+.destacado h2,
+.seccion h2,
+.tarjeta-acceso h3 {
+  margin: 0.3rem 0 0.7rem;
+  color: #0f172a;
+}
+
+.destacado p,
+.seccion p,
+.tarjeta-acceso p {
+  color: #475569;
+}
+
+.seccion {
+  margin-top: 1.5rem;
+  padding: clamp(1.1rem, 3vw, 2rem);
+}
+
+.seccion__encabezado {
+  margin-bottom: 1.2rem;
+}
+
+.tarjetas-acceso {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.tarjeta-acceso {
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 1.2rem;
+  background: #f8fafc;
+}
+
+.tarjeta-acceso span {
+  font-size: 2.4rem;
+}
+
+.pie-pagina {
+  padding: 1.5rem 5vw;
+  text-align: center;
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.pie-pagina p {
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .hero,
+  .tarjetas-acceso {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .pagina {
+    width: min(94vw, 1180px);
+    padding-top: 1rem;
+  }
+}
+.lista-destacados {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 2rem 0;
+}
+
+.lista-destacados li {
+  background-color: #ffffff;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+  color: #243044;
+}
+.tarjeta-destacada .boton-principal {
+  margin-top: 1rem;
+}
+.layout-principal {
+  max-width: 1250px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 2rem;
+  align-items: start;
+}
+
+.contenido-principal {
+  min-width: 0;
+}
+
+.sidebar-promociones {
+  background-color: #ffffff;
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 1.5rem;
+}
+
+.sidebar-promociones h2 {
+  margin: 0 0 1rem 0;
+  color: #111827;
+  font-size: 1.4rem;
+}
+
+.promo-card {
+  background-color: #ecfdf5;
+  border: 1px solid #d1fae5;
+  border-radius: 14px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.promo-card:last-child {
+  margin-bottom: 0;
+}
+
+.promo-icono {
+  font-size: 1.8rem;
+  display: inline-block;
+  margin-bottom: 0.4rem;
+}
+
+.promo-card h3 {
+  margin: 0 0 0.4rem 0;
+  color: #047857;
+  font-size: 1.05rem;
+}
+
+.promo-card p {
+  margin: 0;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.promo-link {
+  display: inline-block;
+  margin-top: 0.8rem;
+  color: #047857;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.promo-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1023px) {
+  .layout-principal {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar-promociones {
+    position: static;
+  }
+}

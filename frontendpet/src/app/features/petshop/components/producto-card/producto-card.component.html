@@ -1,0 +1,21 @@
+<article class="tarjeta-producto">
+  <div class="imagen-contenedor">
+    <img
+      [src]="producto().imagen || 'https://placehold.co/500x350?text=PetShop+Online'"
+      [alt]="'Imagen del producto ' + producto().nombre"
+      loading="lazy"
+    />
+  </div>
+
+  <div class="contenido">
+    <p class="categoria">{{ producto().categoria?.nombreCategoria || 'Sin categoría' }}</p>
+    <h3>{{ producto().nombre }}</h3>
+    <p class="descripcion">{{ producto().descripcion || 'Producto recomendado para el cuidado de tu mascota.' }}</p>
+    <p class="precio">{{ producto().precio | currency:'CLP':'symbol':'1.0-0' }}</p>
+    <p class="stock">Stock disponible: {{ producto().stock }}</p>
+
+    <button type="button" (click)="agregarAlCarrito()" [disabled]="producto().stock <= 0">
+      Agregar al carrito
+    </button>
+  </div>
+</article>

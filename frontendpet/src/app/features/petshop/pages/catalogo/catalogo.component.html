@@ -1,0 +1,37 @@
+<app-menu [cantidadCarrito]="carritoService.cantidad()" />
+
+<main class="pagina">
+  <section class="seccion" aria-labelledby="titulo-catalogo">
+    <div class="seccion__encabezado">
+      <div>
+        <p class="etiqueta">Catálogo</p>
+        <h1 id="titulo-catalogo">Productos disponibles</h1>
+        <p>Filtra por categoría y agrega productos al carrito.</p>
+      </div>
+
+      <label class="filtro" for="categoria">
+        Filtrar por categoría
+        <select id="categoria" name="categoria" [ngModel]="categoriaSeleccionada()" (ngModelChange)="filtrarProductos($event)">
+          <option value="todos">Todos</option>
+          @for (categoria of categorias(); track categoria.id) {
+            <option [value]="categoria.id">{{ categoria.nombreCategoria }}</option>
+          }
+        </select>
+      </label>
+    </div>
+
+    <app-mensaje [texto]="mensaje()" [tipo]="tipoMensaje()" />
+
+    @if (cargando()) {
+      <p class="estado">Cargando productos...</p>
+    } @else if (productosFiltrados().length === 0) {
+      <p class="estado">No hay productos disponibles para esta categoría.</p>
+    } @else {
+      <div class="grilla-productos">
+        @for (producto of productosFiltrados(); track producto.id) {
+          <app-producto-card [producto]="producto" (agregar)="agregarAlCarrito($event)" />
+        }
+      </div>
+    }
+  </section>
+</main>

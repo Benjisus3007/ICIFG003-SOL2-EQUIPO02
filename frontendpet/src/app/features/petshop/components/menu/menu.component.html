@@ -1,0 +1,15 @@
+<header class="encabezado-principal">
+  <a class="marca" routerLink="/" aria-label="Ir al inicio de PetShop Online">
+    <span class="marca__icono" aria-hidden="true">🐾</span>
+    <span>PetShop Online</span>
+  </a>
+
+  <nav class="menu" aria-label="Menú principal">
+    <a routerLink="/catalogo" routerLinkActive="activo">Catálogo</a>
+    <a routerLink="/contacto" routerLinkActive="activo">Contacto</a>
+    <a routerLink="/carrito" routerLinkActive="activo" class="carrito-link" aria-label="Ver carrito de compras">
+      Carrito
+      <span class="contador" aria-label="Productos en el carrito">{{ cantidadCarrito() }}</span>
+    </a>
+  </nav>
+</header>

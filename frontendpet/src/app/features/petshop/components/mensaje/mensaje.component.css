@@ -1,0 +1,21 @@
+.mensaje {
+  margin: 1rem 0;
+  padding: 0.85rem 1rem;
+  border-radius: 0.8rem;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e3a8a;
+  font-weight: 700;
+}
+
+.mensaje--exito {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #065f46;
+}
+
+.mensaje--error {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+}

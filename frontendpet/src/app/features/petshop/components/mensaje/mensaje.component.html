@@ -1,0 +1,5 @@
+@if (texto()) {
+  <p class="mensaje" [class.mensaje--exito]="tipo() === 'exito'" [class.mensaje--error]="tipo() === 'error'" role="status" aria-live="polite">
+    {{ texto() }}
+  </p>
+}

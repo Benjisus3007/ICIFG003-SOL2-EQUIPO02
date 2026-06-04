@@ -1,0 +1,93 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.pagina {
+  width: min(1180px, 90vw);
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.seccion {
+  border: 1px solid #e5e7eb;
+  border-radius: 1.4rem;
+  background: #ffffff;
+  box-shadow: 0 18px 40px rgb(15 23 42 / 8%);
+  padding: clamp(1.1rem, 3vw, 2rem);
+}
+
+.seccion__encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.etiqueta {
+  margin: 0;
+  color: #047857;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+}
+
+h1 {
+  margin: 0.3rem 0 0.5rem;
+}
+
+p {
+  color: #475569;
+}
+
+.filtro {
+  display: grid;
+  gap: 0.35rem;
+  color: #334155;
+  font-weight: 800;
+}
+
+select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  font: inherit;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+select:focus {
+  border-color: #047857;
+  outline: 3px solid #a7f3d0;
+}
+
+.grilla-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.estado {
+  padding: 1rem;
+  border-radius: 0.9rem;
+  background: #f1f5f9;
+  color: #334155;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .pagina {
+    width: min(94vw, 1180px);
+    padding-top: 1rem;
+  }
+
+  .seccion__encabezado {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

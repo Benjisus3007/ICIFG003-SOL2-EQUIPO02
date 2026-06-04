@@ -1,0 +1,168 @@
+<app-menu [cantidadCarrito]="carritoService.cantidad()" />
+
+<main class="pagina">
+  <div class="layout-principal">
+    <div class="contenido-principal">
+      <section class="hero" aria-labelledby="titulo-principal">
+        <div class="hero__contenido">
+          <p class="etiqueta">PetShop Online</p>
+
+          <h1 id="titulo-principal">
+            Todo para cuidar y regalonear a tu mascota
+          </h1>
+
+          <p>
+            Encuentra productos para perros, gatos y accesorios. Desde esta página puedes acceder
+            al catálogo, revisar tu carrito o enviarnos una consulta.
+          </p>
+
+          <div class="acciones">
+            <a class="boton-principal" routerLink="/catalogo">
+              Ver catálogo
+            </a>
+
+            <a class="boton-secundario" routerLink="/contacto">
+              Contactar tienda
+            </a>
+          </div>
+        </div>
+
+        <aside class="destacado" aria-label="Resumen de productos destacados">
+          <span aria-hidden="true">🐶</span>
+
+          <div class="tarjeta-destacada">
+            <h2>Productos destacados</h2>
+
+            @if (productosDestacados().length === 0) {
+              <p>No hay productos disponibles por el momento.</p>
+            } @else {
+              <div class="productos-destacados">
+                @for (producto of productosDestacados(); track producto.id) {
+                  <div class="producto-destacado">
+                    <div>
+                      <h3>{{ producto.nombre }}</h3>
+                      <p>{{ producto.categoria?.nombreCategoria }}</p>
+                    </div>
+
+                    <strong>
+                      {{ producto.precio | currency:'CLP':'symbol':'1.0-0' }}
+                    </strong>
+                  </div>
+                }
+              </div>
+            }
+
+            <a routerLink="/catalogo" class="boton-principal">
+              Ver catálogo
+            </a>
+          </div>
+        </aside>
+      </section>
+
+      <section class="seccion accesos" aria-labelledby="titulo-accesos">
+        <div class="seccion__encabezado">
+          <p class="etiqueta">Navegación rápida</p>
+          <h2 id="titulo-accesos">¿Qué deseas hacer?</h2>
+        </div>
+
+        <div class="tarjetas-acceso">
+          <article class="tarjeta-acceso">
+            <span aria-hidden="true">🛒</span>
+
+            <h3>Catálogo de productos</h3>
+
+            <p>
+              Revisa los productos disponibles y filtra por categoría.
+            </p>
+
+            <a routerLink="/catalogo">
+              Ir al catálogo
+            </a>
+          </article>
+
+          <article class="tarjeta-acceso">
+            <span aria-hidden="true">📦</span>
+
+            <h3>Carrito de compras</h3>
+
+            <p>
+              Consulta los productos agregados y el total acumulado.
+            </p>
+
+            <a routerLink="/carrito">
+              Ver carrito
+            </a>
+          </article>
+
+          <article class="tarjeta-acceso">
+            <span aria-hidden="true">✉️</span>
+
+            <h3>Contacto</h3>
+
+            <p>
+              Envíanos tus dudas o solicitudes mediante el formulario.
+            </p>
+
+            <a routerLink="/contacto">
+              Ir a contacto
+            </a>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="sidebar-promociones" aria-label="Promociones de la tienda">
+      <h2>Promociones</h2>
+
+      <div class="promo-card">
+        <span class="promo-icono" aria-hidden="true">🐾</span>
+
+        <h3>10% de descuento</h3>
+
+        <p>
+          En alimentos seleccionados para perros y gatos.
+        </p>
+      </div>
+
+      <div class="promo-card">
+        <span class="promo-icono" aria-hidden="true">🛒</span>
+
+        <h3>Envío gratis</h3>
+
+        <p>
+          Por compras superiores a $30.000.
+        </p>
+      </div>
+
+      <div class="promo-card">
+        <span class="promo-icono" aria-hidden="true">🎁</span>
+
+        <h3>Pack bienvenida</h3>
+
+        <p>
+          Accesorios básicos para nuevos clientes.
+        </p>
+      </div>
+
+      <div class="promo-card">
+        <span class="promo-icono" aria-hidden="true">⭐</span>
+
+        <h3>Productos destacados</h3>
+
+        <p>
+          Revisa las novedades disponibles en nuestro catálogo.
+        </p>
+
+        <a routerLink="/catalogo" class="promo-link">
+          Ver promociones
+        </a>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="pie-pagina">
+  <p>
+    PetShop Online · Contacto: contacto@petshoponline.cl · Concepción, Chile
+  </p>
+</footer>

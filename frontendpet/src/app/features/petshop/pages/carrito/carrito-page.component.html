@@ -1,0 +1,74 @@
+<app-menu [cantidadCarrito]="carritoService.cantidad()" />
+
+<main class="pagina">
+  <section class="carrito-contenedor">
+    <h1>Carrito de compras</h1>
+
+    @if (carritoService.productosCarrito().length === 0) {
+      <div class="carrito-vacio">
+        <p>El carrito está vacío.</p>
+
+        <a routerLink="/catalogo" class="boton-principal">
+          Ir al catálogo
+        </a>
+      </div>
+    } @else {
+      <div class="lista-carrito">
+        @for (producto of carritoService.productosCarrito(); track producto.id) {
+          <article class="item-carrito">
+            <div class="item-carrito__info">
+              @if (producto.imagen) {
+                <img
+                  [src]="producto.imagen"
+                  [alt]="producto.nombre"
+                  class="item-carrito__imagen"
+                />
+              }
+
+              <div>
+                <h2>{{ producto.nombre }}</h2>
+
+                <p>
+                  Categoría:
+                  {{ producto.categoria?.nombreCategoria || 'Sin categoría' }}
+                </p>
+
+                <p>
+                  Precio:
+                  {{ producto.precio | currency:'CLP':'symbol':'1.0-0' }}
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="boton-eliminar"
+              (click)="eliminarProducto(producto.id)">
+              Eliminar
+            </button>
+          </article>
+        }
+      </div>
+
+      <div class="resumen-carrito">
+        <p>
+          Total:
+          {{ carritoService.total() | currency:'CLP':'symbol':'1.0-0' }}
+        </p>
+
+        <button
+          type="button"
+          class="boton-secundario"
+          (click)="vaciarCarrito()">
+          Vaciar carrito
+        </button>
+
+        <a
+          routerLink="/catalogo"
+          class="boton-principal">
+          Seguir comprando
+        </a>
+      </div>
+    }
+  </section>
+</main>
