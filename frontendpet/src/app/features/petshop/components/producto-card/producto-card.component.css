@@ -66,6 +66,7 @@ button {
   color: #ffffff;
   font-weight: 800;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 button:hover,
@@ -74,7 +75,13 @@ button:focus-visible {
   outline: 3px solid #a7f3d0;
 }
 
+button:active {
+  background: #064e3b;
+  transform: scale(0.97);
+}
+
 button:disabled {
   background: #94a3b8;
   cursor: not-allowed;
+  transform: none;
 }

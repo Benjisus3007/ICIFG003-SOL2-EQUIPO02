@@ -80,7 +80,14 @@ select:focus {
   font-weight: 700;
 }
 
-@media (max-width: 768px) {
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grilla-productos {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
   .pagina {
     width: min(94vw, 1180px);
     padding-top: 1rem;
@@ -89,5 +96,9 @@ select:focus {
   .seccion__encabezado {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .grilla-productos {
+    grid-template-columns: 1fr;
   }
 }

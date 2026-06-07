@@ -4,12 +4,16 @@
     <span>PetShop Online</span>
   </a>
 
-  <nav class="menu" aria-label="Menú principal">
-    <a routerLink="/catalogo" routerLinkActive="activo">Catálogo</a>
-    <a routerLink="/contacto" routerLinkActive="activo">Contacto</a>
-    <a routerLink="/carrito" routerLinkActive="activo" class="carrito-link" aria-label="Ver carrito de compras">
-      Carrito
-      <span class="contador" aria-label="Productos en el carrito">{{ cantidadCarrito() }}</span>
-    </a>
+  <nav aria-label="Menú principal">
+    <ul class="menu">
+      <li><a routerLink="/catalogo" routerLinkActive="activo">Catálogo</a></li>
+      <li><a routerLink="/contacto" routerLinkActive="activo">Contacto</a></li>
+      <li>
+        <a routerLink="/carrito" routerLinkActive="activo" class="carrito-link" aria-label="Ver carrito de compras">
+          Carrito
+          <span class="contador" aria-label="Productos en el carrito">{{ cantidadCarrito() }}</span>
+        </a>
+      </li>
+    </ul>
   </nav>
 </header>

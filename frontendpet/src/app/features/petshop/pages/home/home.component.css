@@ -6,7 +6,7 @@
 }
 
 main.pagina {
-  flex:1;
+  flex: 1;
   background: #f8fafc;
 }
 
@@ -159,19 +159,6 @@ main.pagina {
   margin: 0;
 }
 
-@media (max-width: 1024px) {
-  .hero,
-  .tarjetas-acceso {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .pagina {
-    width: min(94vw, 1180px);
-    padding-top: 1rem;
-  }
-}
 .lista-destacados {
   list-style: none;
   padding: 0;
@@ -186,9 +173,11 @@ main.pagina {
   font-weight: 600;
   color: #243044;
 }
+
 .tarjeta-destacada .boton-principal {
   margin-top: 1rem;
 }
+
 .layout-principal {
   max-width: 1250px;
   margin: 0 auto;
@@ -259,12 +248,35 @@ main.pagina {
   text-decoration: underline;
 }
 
-@media (max-width: 1023px) {
-  .layout-principal {
+@media (min-width: 768px) and (max-width: 1023px) {
+  .layout-principal,
+  .hero,
+  .tarjetas-acceso {
     grid-template-columns: 1fr;
   }
-
+  
   .sidebar-promociones {
     position: static;
+  }
+  
+  .pagina {
+    width: min(94vw, 1180px);
+  }
+}
+
+@media (max-width: 767px) {
+  .layout-principal,
+  .hero,
+  .tarjetas-acceso {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar-promociones {
+    position: static;
+  }
+  
+  .pagina {
+    width: 94vw;
+    padding-top: 1rem;
   }
 }
