@@ -9,13 +9,11 @@ CREATE TABLE IF NOT EXISTS cliente (
     direccion VARCHAR(255),
     fecha_registro DATE
 );
-
 CREATE TABLE IF NOT EXISTS categoria_producto (
     id SERIAL PRIMARY KEY,
     nombre_categoria VARCHAR(100),
     descripcion VARCHAR(255)
 );
-
 CREATE TABLE IF NOT EXISTS producto (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(150),
@@ -25,7 +23,6 @@ CREATE TABLE IF NOT EXISTS producto (
     imagen VARCHAR(255),
     id_categoria INTEGER REFERENCES categoria_producto(id)
 );
-
 CREATE TABLE IF NOT EXISTS mascota (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100),
@@ -36,13 +33,11 @@ CREATE TABLE IF NOT EXISTS mascota (
     peso NUMERIC(5,2),
     id_cliente INTEGER REFERENCES cliente(id)
 );
-
 CREATE TABLE IF NOT EXISTS carrito (
     id SERIAL PRIMARY KEY,
     fecha_creacion TIMESTAMP,
     id_cliente INTEGER REFERENCES cliente(id)
 );
-
 CREATE TABLE IF NOT EXISTS detalle_carrito (
     id SERIAL PRIMARY KEY,
     precio_unitario NUMERIC(10,2),
@@ -50,7 +45,6 @@ CREATE TABLE IF NOT EXISTS detalle_carrito (
     id_carrito INTEGER REFERENCES carrito(id),
     id_producto INTEGER REFERENCES producto(id)
 );
-
 CREATE TABLE IF NOT EXISTS contacto (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -71,16 +65,16 @@ INSERT INTO categoria_producto (nombre_categoria, descripcion) VALUES
 ('Higiene', 'Productos de higiene y limpieza para mascotas');
 
 INSERT INTO producto (nombre, descripcion, precio, stock, imagen, id_categoria) VALUES
-('Alimento Premium Perro', 'Alimento seco balanceado para perro adulto, bolsa 15kg', 18990, 20, 'alimento_perro.jpg', 1),
-('Snack Dental Perro', 'Snacks para limpieza dental canina, pack x20', 4990, 50, 'snack_dental.jpg', 1),
-('Cama Ortopedica Perro', 'Cama acolchada con soporte ortopedico talla M', 24990, 10, 'cama_perro.jpg', 1),
-('Alimento Premium Gato', 'Alimento seco para gatos adultos, bolsa 3kg', 9990, 30, 'alimento_gato.jpg', 2),
-('Arena Sanitaria Aglomerante', 'Arena sanitaria para gatos bajo olor, bolsa 10kg', 7990, 40, 'arena.jpg', 2),
-('Rascador Torre Gato', 'Rascador de sisal con plataformas, 80cm', 19990, 15, 'rascador.jpg', 2),
-('Correa Retractil 5m', 'Correa retractil resistente hasta 25kg', 12990, 25, 'correa.jpg', 3),
-('Comedero Doble Acero', 'Comedero doble acero inoxidable antideslizante', 6990, 35, 'comedero.jpg', 3),
-('Transportadora Rigida M', 'Transportadora plastica con ventilacion talla M', 29990, 8, 'transportadora.jpg', 3),
-('Shampoo Mascotas Neutro', 'Shampoo hipoalergenico para perros y gatos 500ml', 5490, 45, 'shampoo.jpg', 4);
+('Alimento Premium Perro', 'Alimento seco balanceado para perro adulto, bolsa 15kg', 18990, 20, 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400', 1),
+('Snack Dental Perro', 'Snacks para limpieza dental canina, pack x20', 4990, 50, 'https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=400', 1),
+('Cama Ortopedica Perro', 'Cama acolchada con soporte ortopedico talla M', 24990, 10, 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400', 1),
+('Alimento Premium Gato', 'Alimento seco para gatos adultos, bolsa 3kg', 9990, 30, 'https://images.unsplash.com/photo-1548681528-6a5c45b66b42?w=400', 2),
+('Arena Sanitaria Aglomerante', 'Arena sanitaria para gatos bajo olor, bolsa 10kg', 7990, 40, 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400', 2),
+('Rascador Torre Gato', 'Rascador de sisal con plataformas, 80cm', 19990, 15, 'https://images.unsplash.com/photo-1615789591457-74a63395c990?w=400', 2),
+('Correa Retractil 5m', 'Correa retractil resistente hasta 25kg', 12990, 25, 'https://images.unsplash.com/photo-1601758003122-53c40e686a19?w=400', 3),
+('Comedero Doble Acero', 'Comedero doble acero inoxidable antideslizante', 6990, 35, 'https://images.unsplash.com/photo-1677973591478-41b5b97d7738?w=400', 3),
+('Transportadora Rigida M', 'Transportadora plastica con ventilacion talla M', 29990, 8, 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400', 3),
+('Shampoo Mascotas Neutro', 'Shampoo hipoalergenico para perros y gatos 500ml', 5490, 45, 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400', 4);
 
 INSERT INTO mascota (nombre, especie, raza, sexo, fecha_nacimiento, peso, id_cliente) VALUES
 ('Firulais', 'Perro', 'Labrador', 'Macho', '2021-03-15', 28.5, 1),
