@@ -1,12 +1,13 @@
 package com.backendpet.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -37,7 +38,12 @@ public class Cliente {
 
     @Column(length = 200)
     private String direccion;
+    
     @Column(name = "fecha_registro")
-    private LocalDate fechaRegistro; // 
+    private LocalDate fechaRegistro;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Carrito> carritos;
 
 }

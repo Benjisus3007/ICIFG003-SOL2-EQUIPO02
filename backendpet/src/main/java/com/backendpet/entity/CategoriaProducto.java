@@ -1,10 +1,12 @@
 package com.backendpet.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -23,5 +25,9 @@ public class CategoriaProducto {
 
     @Column(length = 200)
     private String descripcion;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+    private List<Producto> productos;
 
 }
