@@ -14,28 +14,38 @@
       </div>
     } @else {
       <div class="lista-carrito">
-        @for (producto of carritoService.productosCarrito(); track producto.id) {
+        @for (item of carritoService.itemsAgrupados(); track item.producto.id) {
           <article class="item-carrito">
             <div class="item-carrito__info">
-              @if (producto.imagen) {
+              @if (item.producto.imagen) {
                 <img
-                  [src]="producto.imagen"
-                  [alt]="producto.nombre"
+                  [src]="item.producto.imagen"
+                  [alt]="item.producto.nombre"
                   class="item-carrito__imagen"
                 />
               }
 
               <div>
-                <h2>{{ producto.nombre }}</h2>
+                <h2>{{ item.producto.nombre }}</h2>
 
                 <p>
                   Categoría:
-                  {{ producto.categoria?.nombreCategoria || 'Sin categoría' }}
+                  {{ item.producto.categoria?.nombreCategoria || 'Sin categoría' }}
                 </p>
 
                 <p>
-                  Precio:
-                  {{ producto.precio | currency:'CLP':'symbol':'1.0-0' }}
+                  Precio unitario:
+                  {{ item.producto.precio | currency:'CLP':'symbol':'1.0-0' }}
+                </p>
+
+                <p>
+                  Cantidad:
+                  {{ item.cantidad }}
+                </p>
+
+                <p>
+                  Subtotal:
+                  {{ item.subtotal | currency:'CLP':'symbol':'1.0-0' }}
                 </p>
               </div>
             </div>
@@ -43,8 +53,8 @@
             <button
               type="button"
               class="boton-eliminar"
-              (click)="eliminarProducto(producto.id)">
-              Eliminar
+              (click)="eliminarProducto(item.producto.id)">
+              Eliminar una unidad
             </button>
           </article>
         }
@@ -62,6 +72,12 @@
           (click)="vaciarCarrito()">
           Vaciar carrito
         </button>
+
+        <a
+          routerLink="/confirmar-compra"
+          class="boton-principal">
+          Confirmar compra
+        </a>
 
         <a
           routerLink="/catalogo"

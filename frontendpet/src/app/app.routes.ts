@@ -17,6 +17,12 @@ export const routes: Routes = [
   },
 
   {
+    path: 'confirmar-compra',
+    loadChildren: () =>
+      import('./features/petshop/compra.routes').then(m => m.COMPRA_ROUTES)
+  },
+
+  {
     path: 'contacto',
     loadChildren: () =>
       import('./features/petshop/contacto.routes').then(m => m.CONTACTO_ROUTES)

@@ -26,9 +26,14 @@ export class ContactoPageComponent {
   };
 
   enviarContacto(formulario: NgForm): void {
-    if (formulario.invalid || this.contacto.mensaje.trim().length < 20) {
-      this.mostrarMensaje('Completa nombre, correo válido y un mensaje de al menos 20 caracteres.', 'error');
-      return;
+    if (
+      formulario.invalid ||
+      !this.contacto.nombre.trim() ||
+      !this.contacto.correo.trim() ||
+      this.contacto.mensaje.trim().length < 20
+    ) {
+    this.mostrarMensaje('Completa nombre, correo válido y un mensaje de al menos 20 caracteres.', 'error');
+  return;
     }
 
     this.contactoService.enviar(this.contacto).subscribe({

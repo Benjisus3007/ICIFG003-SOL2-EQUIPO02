@@ -19,8 +19,6 @@ export class CatalogoComponent implements OnInit {
   private readonly categoriaService = inject(CategoriaService);
   readonly carritoService = inject(CarritoService);
 
-  private readonly idClienteDemo = 1;
-
   productos = signal<Producto[]>([]);
   categorias = signal<CategoriaProducto[]>([]);
   categoriaSeleccionada = signal<number | 'todos'>('todos');
@@ -70,24 +68,10 @@ export class CatalogoComponent implements OnInit {
   agregarAlCarrito(producto: Producto): void {
     this.carritoService.agregarLocal(producto);
 
-    this.carritoService.agregarEnBackend({
-      idCliente: this.idClienteDemo,
-      idProducto: producto.id,
-      cantidad: 1,
-    }).subscribe({
-      next: () => {
-        this.mostrarMensaje(
-          `${producto.nombre} fue agregado al carrito.`,
-          'exito'
-        );
-      },
-      error: () => {
-        this.mostrarMensaje(
-          `${producto.nombre} fue agregado localmente. Para guardar en BD debe existir el cliente con ID 1.`,
-          'info'
-        );
-      }
-    });
+    this.mostrarMensaje(
+      `${producto.nombre} fue agregado al carrito.`,
+      'exito'
+  );
 }
   private mostrarMensaje(texto: string, tipo: 'exito' | 'error' | 'info'): void {
     this.mensaje.set(texto);

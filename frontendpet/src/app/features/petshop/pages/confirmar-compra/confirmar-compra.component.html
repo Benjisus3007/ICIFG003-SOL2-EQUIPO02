@@ -1,0 +1,157 @@
+<app-menu [cantidadCarrito]="carritoService.cantidad()" />
+
+<main class="pagina">
+  <section class="compra-contenedor">
+    <p class="etiqueta">Confirmación</p>
+    <h1>Confirmar compra</h1>
+    <p class="descripcion">
+      Ingresa los datos del cliente. El pago y retiro se realizan directamente en tienda.
+    </p>
+
+    <app-mensaje [texto]="mensaje()" [tipo]="tipoMensaje()" />
+
+    @if (carritoService.productosCarrito().length === 0) {
+      <div class="tarjeta vacio">
+        <p>El carrito está vacío o la compra ya fue confirmada.</p>
+
+        <a routerLink="/catalogo" class="boton-principal">
+          Volver al catálogo
+        </a>
+      </div>
+    } @else {
+      <div class="layout-compra">
+        <form #formularioCompra="ngForm" class="formulario" (ngSubmit)="confirmarCompra(formularioCompra)">
+          <h2>Datos del cliente</h2>
+
+          <div class="grupo">
+            <label for="rut">RUT</label>
+            <input
+              id="rut"
+              name="rut"
+              type="text"
+              [(ngModel)]="cliente.rut"
+              placeholder="Ej: 12345678-9"
+            />
+          </div>
+
+          <div class="dos-columnas">
+            <div class="grupo">
+              <label for="nombre">Nombre *</label>
+              <input
+                id="nombre"
+                name="nombre"
+                type="text"
+                [(ngModel)]="cliente.nombre"
+                required
+                placeholder="Nombre del cliente"
+              />
+            </div>
+
+            <div class="grupo">
+              <label for="apellido">Apellido *</label>
+              <input
+                id="apellido"
+                name="apellido"
+                type="text"
+                [(ngModel)]="cliente.apellido"
+                required
+                placeholder="Apellido del cliente"
+              />
+            </div>
+          </div>
+
+          <div class="grupo">
+            <label for="correo">Correo electrónico *</label>
+            <input
+              id="correo"
+              name="correo"
+              type="email"
+              [(ngModel)]="cliente.correo"
+              required
+              email
+              placeholder="cliente@correo.com"
+            />
+          </div>
+
+          <div class="grupo">
+            <label for="telefono">Teléfono *</label>
+            <input
+              id="telefono"
+              name="telefono"
+              type="tel"
+              [(ngModel)]="cliente.telefono"
+              required
+              pattern="^[0-9+ ]{8,15}$"
+              placeholder="+56912345678"
+            />
+          </div>
+
+          <div class="grupo">
+            <label for="direccion">Dirección</label>
+            <input
+              id="direccion"
+              name="direccion"
+              type="text"
+              [(ngModel)]="cliente.direccion"
+              placeholder="Opcional"
+            />
+          </div>
+
+          <div class="grupo">
+            <label for="observaciones">Observaciones</label>
+            <textarea
+              id="observaciones"
+              name="observaciones"
+              [(ngModel)]="observaciones"
+              rows="4"
+              placeholder="Ej: retiraré durante la tarde"
+            ></textarea>
+          </div>
+
+          <div class="aviso-retiro">
+            <strong>Retiro:</strong> En tienda.
+            <br />
+            <strong>Pago:</strong> Al momento del retiro.
+            <br />
+            <strong>Fecha:</strong> {{ fechaActual | date:'dd/MM/yyyy HH:mm' }}
+          </div>
+
+          <button
+            type="submit"
+            class="boton-principal"
+            [disabled]="guardando()">
+            {{ guardando() ? 'Guardando compra...' : 'Confirmar compra' }}
+          </button>
+        </form>
+
+        <aside class="resumen">
+          <h2>Resumen de compra</h2>
+
+          @for (item of carritoService.itemsAgrupados(); track item.producto.id) {
+            <article class="item-resumen">
+              <div>
+                <h3>{{ item.producto.nombre }}</h3>
+                <p>Cantidad: {{ item.cantidad }}</p>
+                <p>
+                  Precio unitario:
+                  {{ item.producto.precio | currency:'CLP':'symbol':'1.0-0' }}
+                </p>
+              </div>
+
+              <strong>
+                {{ item.subtotal | currency:'CLP':'symbol':'1.0-0' }}
+              </strong>
+            </article>
+          }
+
+          <div class="total">
+            <span>Total</span>
+            <strong>
+              {{ carritoService.total() | currency:'CLP':'symbol':'1.0-0' }}
+            </strong>
+          </div>
+        </aside>
+      </div>
+    }
+  </section>
+</main>
