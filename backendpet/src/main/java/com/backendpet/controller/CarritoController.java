@@ -1,44 +1,25 @@
 package com.backendpet.controller;
 
-import com.backendpet.dto.AgregarAlCarritoRequest;
-import com.backendpet.dto.CarritoResponseDTO;
 import com.backendpet.entity.Carrito;
-import com.backendpet.service.CarritoService;
+import com.backendpet.repository.CarritoRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/carritos")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200") // Permite la conexión con Angular
 public class CarritoController {
 
+    private Logger logger = LoggerFactory.getLogger(CarritoController.class);
+
     @Autowired
-    private CarritoService carritoService;
-
-    @GetMapping
-    public List<Carrito> listarTodos() {
-        return carritoService.obtenerTodos();
-    }
-
-    @GetMapping("/{id}")
-    public Carrito obtenerPorId(@PathVariable Integer id) {
-        return carritoService.obtenerPorId(id);
-    }
-
-    @PostMapping
-    public Carrito guardar(@RequestBody Carrito carrito) {
-        return carritoService.guardar(carrito);
-    }
-
-    @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable Integer id) {
-        carritoService.eliminar(id);
-    }
+    private CarritoRepository carritoRepository;
 
     @PostMapping("/agregar")
-    public CarritoResponseDTO agregarAlCarrito(@RequestBody AgregarAlCarritoRequest request) {
-        return carritoService.agregarProducto(request);
+    public Carrito guardarCarritoFrontend(@RequestBody Carrito carrito) {
+        logger.info("este es un logger - Recibiendo datos de compra en el carrito desde Angular");
+        return carritoRepository.save(carrito); // Guarda directo en la base de datos
     }
 }
