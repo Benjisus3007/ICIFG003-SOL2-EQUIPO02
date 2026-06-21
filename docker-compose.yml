@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  mysql_db:
+    image: mysql:8.0
+    container_name: petshop_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: petshopdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backendpet
+    container_name: petshop_backend
+    restart: always
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backendpet/logs:/app/logs
+
+  frontend:
+    build:
+      context: ./frontendpet
+    container_name: petshop_frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "4200:80"
+
+volumes:
+  mysql_data:
