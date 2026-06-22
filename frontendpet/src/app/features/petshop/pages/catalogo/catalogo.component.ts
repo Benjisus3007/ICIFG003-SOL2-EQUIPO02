@@ -1,12 +1,13 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CategoriaProducto, Producto } from '../../models/petshop.models';
+import { AgregarAlCarritoRequest, CategoriaProducto, Producto } from '../../models/petshop.models';
 import { CarritoService } from '../../services/carrito.service';
 import { CategoriaService } from '../../services/categoria.service';
 import { ProductoService } from '../../services/producto.service';
 import { MenuComponent } from '../../components/menu/menu.component';
 import { Mensaje } from '../../components/mensaje/mensaje.component';
 import { ProductoCard } from '../../components/producto-card/producto-card.component';
+
 
 @Component({
   selector: 'app-catalogo',
@@ -65,13 +66,23 @@ export class CatalogoComponent implements OnInit {
     this.categoriaSeleccionada.set(valor === 'todos' ? 'todos' : Number(valor));
   }
 
-  agregarAlCarrito(producto: Producto): void {
-    this.carritoService.agregarLocal(producto);
+agregarAlCarrito(producto: Producto): void {
+  this.carritoService.agregarLocal(producto);
 
-    this.mostrarMensaje(
-      `${producto.nombre} fue agregado al carrito.`,
-      'exito'
-  );
+  const request: AgregarAlCarritoRequest = {
+    idCliente: 1,
+    idProducto: producto.id,
+    cantidad: 1
+  };
+
+  this.carritoService.agregarEnBackend(request).subscribe({
+    next: () => {
+      this.mostrarMensaje(`${producto.nombre} fue agregado al carrito.`, 'exito');
+    },
+    error: () => {
+      this.mostrarMensaje(`${producto.nombre} fue agregado al carrito (sin conexión al servidor).`, 'info');
+    }
+  });
 }
   private mostrarMensaje(texto: string, tipo: 'exito' | 'error' | 'info'): void {
     this.mensaje.set(texto);

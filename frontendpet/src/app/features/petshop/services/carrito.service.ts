@@ -50,7 +50,7 @@ export class CarritoService {
   }
 
   agregarEnBackend(data: AgregarAlCarritoRequest) {
-    return this.http.post<CarritoResponseDTO>(`${this.apiUrl}/agregar`, data);
+    return this.http.post<any>(`${this.apiUrl}/agregar`, data);
   }
 
   eliminarProducto(idProducto: number): void {
