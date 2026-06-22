@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, computed, inject, signal } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AgregarAlCarritoRequest, CarritoResponseDTO, ItemCarritoLocal, Producto } from '../models/petshop.models';
+import { Injectable, computed, signal } from '@angular/core';
+import {
+  AgregarAlCarritoRequest,
+  CarritoResponseDTO,
+  ItemCarritoAgrupado,
+  Producto,
+  ProductoCompra
+} from '../models/petshop.models';
 
 @Injectable({
   providedIn: 'root'
@@ -17,27 +22,55 @@ export class CarritoService {
     this.productosCarrito().reduce((suma, producto) => suma + producto.precio, 0)
   );
 
+  itemsAgrupados = computed<ItemCarritoAgrupado[]>(() => {
+    const mapa = new Map<number, ItemCarritoAgrupado>();
+
+    for (const producto of this.productosCarrito()) {
+      const itemExistente = mapa.get(producto.id);
+
+      if (itemExistente) {
+        itemExistente.cantidad += 1;
+        itemExistente.subtotal = itemExistente.cantidad * itemExistente.producto.precio;
+      } else {
+        mapa.set(producto.id, {
+          producto,
+          cantidad: 1,
+          subtotal: producto.precio,
+        });
+      }
+    }
+
+    return Array.from(mapa.values());
+  });
+
   constructor(private http: HttpClient) {}
 
   agregarLocal(producto: Producto): void {
     this.productosCarrito.update(productos => [...productos, producto]);
   }
 
-  agregarEnBackend(data: {
-    idCliente: number;
-    idProducto: number;
-    cantidad: number;
-  }) {
-    return this.http.post(`${this.apiUrl}/agregar`, data);
+  agregarEnBackend(data: AgregarAlCarritoRequest) {
+    return this.http.post<any>(`${this.apiUrl}/agregar`, data);
   }
 
   eliminarProducto(idProducto: number): void {
-    this.productosCarrito.update(productos =>
-      productos.filter(producto => producto.id !== idProducto)
-    );
+    const copia = [...this.productosCarrito()];
+    const indice = copia.findIndex(producto => producto.id === idProducto);
+
+    if (indice >= 0) {
+      copia.splice(indice, 1);
+      this.productosCarrito.set(copia);
+    }
   }
 
   vaciarCarrito(): void {
     this.productosCarrito.set([]);
+  }
+
+  productosParaCompra(): ProductoCompra[] {
+    return this.itemsAgrupados().map(item => ({
+      idProducto: item.producto.id,
+      cantidad: item.cantidad,
+    }));
   }
 }
